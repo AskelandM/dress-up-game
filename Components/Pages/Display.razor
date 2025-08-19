@@ -1,0 +1,21 @@
+@page "/display"
+@rendermode InteractiveServer
+
+@* Picture of Marty in the outfit *@
+
+@if (outfit is not null)
+{
+    <img src="@($"images/body.png")" />
+    <img src="@($"images/shirt/{outfit.Shirt}.png")" />
+    <img src="@($"images/face/{outfit.Face}.png")" />
+}
+
+
+@code {
+    
+    [Parameter]
+    public Outfit outfit {get; set;} = new();
+
+}
+
+
