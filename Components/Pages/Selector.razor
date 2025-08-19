@@ -1,7 +1,9 @@
 @page "/selector"
 @rendermode InteractiveServer
 
-@* displays outfit options *@
+@* selects outfit options *@
+
+@* category buttons -> a variable *@
 <table>
     <tr>
         <th>hair</th>
@@ -9,4 +11,7 @@
         <th>shirts</th>
     </tr>
 </table>
+
+@* depending on that variable, a list of other options are displayed beneath *@
+         @* L->  this sets the outfit (through a function declared in Home.razor) *@
 

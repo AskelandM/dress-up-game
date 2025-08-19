@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\repos\\DressUpGame\\BlazorApp.csproj": {}
+    "D:\\repos\\DressUpGame\\BlazorApp.csproj": {}
   },
   "projects": {
-    "d:\\repos\\DressUpGame\\BlazorApp.csproj": {
+    "D:\\repos\\DressUpGame\\BlazorApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\repos\\DressUpGame\\BlazorApp.csproj",
+        "projectUniqueName": "D:\\repos\\DressUpGame\\BlazorApp.csproj",
         "projectName": "BlazorApp",
-        "projectPath": "d:\\repos\\DressUpGame\\BlazorApp.csproj",
+        "projectPath": "D:\\repos\\DressUpGame\\BlazorApp.csproj",
         "packagesPath": "C:\\Users\\morga\\.nuget\\packages\\",
-        "outputPath": "d:\\repos\\DressUpGame\\obj\\",
+        "outputPath": "D:\\repos\\DressUpGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\morga\\AppData\\Roaming\\NuGet\\NuGet.Config"
