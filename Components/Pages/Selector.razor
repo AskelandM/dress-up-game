@@ -1,17 +1,53 @@
 @page "/selector"
 @rendermode InteractiveServer
 
-@* selects outfit options *@
+@* Displays the clothing item options *@
 
-@* category buttons -> a variable *@
-<table>
-    <tr>
-        <th>hair</th>
-        <th>face</th>
-        <th>shirts</th>
-    </tr>
-</table>
+<MudTabs>
+    @foreach (var category in Parts.Keys)
+    {
+        <MudTabPanel Text="@category">
+            @foreach (var option in Parts[category])
+            {
+                <MudButton OnClick="() => ChangePart(category, option)">
+                    @DisplayName(option)
+                </MudButton>
+            }
+        </MudTabPanel>
+    }
+</MudTabs>
 
-@* depending on that variable, a list of other options are displayed beneath *@
-         @* L->  this sets the outfit (through a function declared in Home.razor) *@
+@code {
+    // category -> list of available options (file paths)
+    private Dictionary<string, List<string>> Parts = new();
 
+    [Parameter] public Outfit outfit { get; set; } = new();
+    [Parameter] public EventCallback<Outfit> OnOutfitChanged { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var imagesRoot = Path.Combine(Environment.CurrentDirectory, "wwwroot/images");
+
+        if (Directory.Exists(imagesRoot))
+        {
+            foreach (var categoryDir in Directory.GetDirectories(imagesRoot))
+            {
+                var category = Path.GetFileName(categoryDir); // e.g. "hair"
+                var options = Directory.GetFiles(categoryDir, "*.png").ToList();
+                Parts[category] = options;
+            }
+        }
+    }
+
+    private async Task ChangePart(string category, string file)
+    {
+        outfit.Parts[category] = file;
+        await OnOutfitChanged.InvokeAsync(outfit);
+    }
+
+    private string DisplayName(string filePath)
+    {
+        var fileName = Path.GetFileNameWithoutExtension(filePath);
+        return fileName.Replace("-", " ").Replace("_", " "); 
+    }
+}

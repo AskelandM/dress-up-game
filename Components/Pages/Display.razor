@@ -6,8 +6,10 @@
 @if (outfit is not null)
 {
     <img src="@($"images/body.png")" />
-    <img src="@($"images/shirt/{outfit.Shirt}.png")" />
-    <img src="@($"images/face/{outfit.Face}.png")" />
+
+    @foreach (var part in outfit.Parts) {
+        <img src="@($"images/{part.Key}/{part.Value}")" />
+    }
 }
 
 

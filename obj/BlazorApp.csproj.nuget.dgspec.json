@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\DressUpGame\\BlazorApp.csproj": {}
+    "d:\\repos\\DressUpGame\\BlazorApp.csproj": {}
   },
   "projects": {
-    "D:\\repos\\DressUpGame\\BlazorApp.csproj": {
+    "d:\\repos\\DressUpGame\\BlazorApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\DressUpGame\\BlazorApp.csproj",
+        "projectUniqueName": "d:\\repos\\DressUpGame\\BlazorApp.csproj",
         "projectName": "BlazorApp",
-        "projectPath": "D:\\repos\\DressUpGame\\BlazorApp.csproj",
+        "projectPath": "d:\\repos\\DressUpGame\\BlazorApp.csproj",
         "packagesPath": "C:\\Users\\morga\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\DressUpGame\\obj\\",
+        "outputPath": "d:\\repos\\DressUpGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\morga\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[8.11.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

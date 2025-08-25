@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<PageTitle>Marty Dress Up</PageTitle>
+<PageTitle>Dress Up</PageTitle>
 
 <div class="page-wrapper">
     <h1>Dress Up Game</h1>
@@ -18,5 +18,13 @@
 
 
 @code {
-    private Outfit outfit = new();
+    private Outfit outfit = new Outfit {
+        Parts = new Dictionary<string, string> {
+            { "Hair", "2020s.png" },
+            { "Face", "2020s.png" },
+            { "Shirt", "red-flannel.png" },
+            { "Pants", "black-skinny-jeans.png" },
+            { "Shoes", "black-platforms.png" }
+        }
+    };
 }
