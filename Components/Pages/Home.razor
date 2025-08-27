@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using System.Collections
+@rendermode InteractiveServer
 
 <PageTitle>Dress Up</PageTitle>
 
@@ -6,12 +8,12 @@
     <h1>Dress Up Game</h1>
 
     <div class="page">
-        <div class="outfit-display" >
-            <Display outfit=outfit />
+       <div class="outfit-display">
+            <Display outfit="@outfit" />
         </div>
 
-        <div class="outfit-selector" >
-            <Selector />
+        <div class="outfit-selector">
+            <Selector OnSelectionChanged="HandleOutfitChanged" />
         </div>
     </div>
 </div>
@@ -20,11 +22,14 @@
 @code {
     private Outfit outfit = new Outfit {
         Parts = new Dictionary<string, string> {
-            { "Hair", "2020s.png" },
-            { "Face", "2020s.png" },
-            { "Shirt", "red-flannel.png" },
-            { "Pants", "black-skinny-jeans.png" },
-            { "Shoes", "black-platforms.png" }
-        }
+            { "face", "2020s.png" },
+            { "shirt", "red-flannel.png" }}
     };
+
+    private List<string> changedPart = new List<string>{"empty", "empty"};
+
+    private void HandleOutfitChanged(string[] arr)
+    {
+        outfit.Parts[arr[0]] = arr[1];
+    }
 }

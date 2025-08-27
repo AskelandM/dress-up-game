@@ -1,6 +1,3 @@
-@page "/display"
-@rendermode InteractiveServer
-
 @* Picture of Marty in the outfit *@
 
 @if (outfit is not null)
@@ -15,8 +12,7 @@
 
 @code {
     
-    [Parameter]
-    public Outfit outfit {get; set;} = new();
+    [Parameter, EditorRequired] public Outfit outfit {get; set;}
 
 }
 
