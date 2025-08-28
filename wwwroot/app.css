@@ -120,6 +120,11 @@ h1:focus {
     width: 30%; 
 }
 
+.retrieve-outfit {
+    display: flex;
+    width: 30%; 
+}
+
 /* phone */
 @media (max-width: 640.98px) {
     .page {

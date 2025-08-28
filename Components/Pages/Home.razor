@@ -12,11 +12,12 @@
             <MudButton Variant="Variant.Filled" Color="Color.Primary" DropShadow="false" OnClick="SaveOutfit" Style="margin: 8px">
                 Save
             </MudButton>
-
-            <MudMenu Label="Saved Outfits">
-                <MudMenuItem Label="Starter Outfit" />
-                <MudMenuItem Label="My Outfit" />
-            </MudMenu>
+        </div>
+        <div class="retrieve-outfit">
+            <MudSelect @bind-Value="currentSaved" Clearable="true" Placeholder="None Selected" Variant="Variant.Outlined" Style="margin: 8px">
+                <MudSelectItem Value="@("Starter Outfit")" />
+                <MudSelectItem Value="@("My Outfit")" />
+            </MudSelect>
         </div>
     </div>
 
@@ -41,6 +42,7 @@
     private string outfitName { get; set; } = string.Empty;
     private List<string> changedPart = new List<string>{"empty", "empty"};
     private List<string> savedOutfits = new List<string>{"default"};
+    private string currentSaved = string.Empty;
 
     private void HandleOutfitChanged(string[] arr)
     {
@@ -61,7 +63,7 @@
     private void RetrieveOutfit(string outfitName) {
         // set current outfit to the outfitName settings stored in cookies
         // (Display should autoupdate, so just change the oufit variable here)
-        
+
         // TODO
     }
 }
