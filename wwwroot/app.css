@@ -16,11 +16,6 @@ a, .btn-link {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-
-h1 {
-    text-align: center;
-}
-
 h1:focus {
     outline: none;
 }
@@ -86,7 +81,7 @@ h1:focus {
     display: flex;
     align-items: center;     /* vertically center */
     justify-content: center; /* horizontally center */
-    background: #6059be;     /* optional: helps you see box bounds */
+    /* background: #6059be;     optional: helps you see box bounds */
 }
 
 .outfit-display img {
@@ -102,7 +97,28 @@ h1:focus {
     display: flex;
 }
 
+.mud-button-root.selection-button {
+    margin: 0.25rem;
+    font-size: 1.1rem;
+}
 
+.header-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* pushes title left, form right */
+    align-items: center; /* vertically align them */
+    width: 100vw;
+    padding: 0 1rem; /* optional breathing room */
+}
+
+.page-title {
+    font-size: 3rem;
+}
+
+.save-outfit {
+    display: flex;
+    width: 30%; 
+}
 
 /* phone */
 @media (max-width: 640.98px) {

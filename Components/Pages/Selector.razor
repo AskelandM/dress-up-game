@@ -1,10 +1,10 @@
 <MudTabs>
     @foreach (var category in Parts.Keys)
     {
-        <MudTabPanel Text="@category">
+        <MudTabPanel Text="@category" Style="font-size:1.3rem">
             @foreach (var option in Parts[category])
             {
-                <MudButton OnClick="() => SelectOption(category, option)">
+                <MudButton OnClick="() => SelectOption(category, option)" Class="selection-button" Variant="Variant.Outlined">
                     @DisplayName(option)
                 </MudButton>
             }
