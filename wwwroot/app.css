@@ -117,12 +117,12 @@ h1:focus {
 
 .save-outfit {
     display: flex;
-    width: 30%; 
+    width: 25%; 
 }
 
 .retrieve-outfit {
     display: flex;
-    width: 30%; 
+    width: 40%; 
 }
 
 /* phone */

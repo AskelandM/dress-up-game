@@ -16,10 +16,6 @@
     private Dictionary<string, List<string>> Parts = new();
     [Parameter] public EventCallback<string[]> OnSelectionChanged { get; set; }
 
-    protected override void OnParametersSet()
-    {
-        Console.WriteLine($"HasDelegate: {OnSelectionChanged.HasDelegate}");
-    }
     protected override void OnInitialized()
     {
         var imagesRoot = Path.Combine(Environment.CurrentDirectory, "wwwroot/images");

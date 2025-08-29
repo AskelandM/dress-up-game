@@ -14,10 +14,20 @@
             </MudButton>
         </div>
         <div class="retrieve-outfit">
-            <MudSelect @bind-Value="currentSaved" Clearable="true" Placeholder="None Selected" Variant="Variant.Outlined" Style="margin: 8px">
-                <MudSelectItem Value="@("Starter Outfit")" />
-                <MudSelectItem Value="@("My Outfit")" />
+            <MudSelect @bind-Value="currentSaved" Clearable="true" Placeholder="Saved Outfits - None Selected" Variant="Variant.Outlined" Style="margin: 8px">
+                @foreach (var option in savedOutfits) {
+                    <MudSelectItem Value="option" />
+                }
             </MudSelect>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DropShadow="false" OnClick="RetrieveOutfit" Style="margin: 8px">
+                Select
+            </MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DropShadow="false" OnClick="UpdateOutfit" Style="margin: 8px">
+                Update
+            </MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DropShadow="false" OnClick="DeleteOutfit" Style="margin: 8px">
+                Delete
+            </MudButton>
         </div>
     </div>
 
@@ -39,16 +49,30 @@
             { "face", "2020s.png" },
             { "shirt", "red-flannel.png" }}
     };
-    private string outfitName { get; set; } = string.Empty;
+    private string outfitName = string.Empty; // text field
     private List<string> changedPart = new List<string>{"empty", "empty"};
-    private List<string> savedOutfits = new List<string>{"default"};
-    private string currentSaved = string.Empty;
+    private List<string> savedOutfits = new List<string>();
+    private string currentSaved = string.Empty; // dropdown
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) {
+            // get list of outfits from local storage
+            var outfitsResult = await ProtectedLocalStore.GetAsync<List<string>>("savedOutfits");
+            if (outfitsResult.Success && outfitsResult.Value != null) {
+                savedOutfits = outfitsResult.Value;
+            }
+            else {
+                Console.WriteLine("No saved outfits found");
+            }
+        }
+    }
 
     private void HandleOutfitChanged(string[] arr)
     {
         outfit.Parts[arr[0]] = arr[1];
     }
-    private void SaveOutfit()
+    private async Task SaveOutfit()
     {
         if (string.IsNullOrWhiteSpace(outfitName))
         {
@@ -56,14 +80,59 @@
             return;
         }
 
-        // Here you could save the current `outfit` state under that name.
+        // get list of outfits from local storage
+        var outfitsResult = await ProtectedLocalStore.GetAsync<List<string>>("savedOutfits");
+        if (outfitsResult.Success && outfitsResult.Value != null) {
+            savedOutfits = outfitsResult.Value;
+        }
+        else {
+            Console.WriteLine("No saved outfits found");
+        }
+        // update list with new oufit name
+        if (!savedOutfits.Contains(outfitName))
+            savedOutfits.Add(outfitName);
+        // save to local storage
+        await ProtectedLocalStore.SetAsync("savedOutfits", savedOutfits);
+        await ProtectedLocalStore.SetAsync(outfitName, outfit);
         Console.WriteLine($"Saving outfit '{outfitName}' with {outfit.Parts.Count} parts.");
     }
 
-    private void RetrieveOutfit(string outfitName) {
+    private async Task RetrieveOutfit() {
         // set current outfit to the outfitName settings stored in cookies
         // (Display should autoupdate, so just change the oufit variable here)
+        var result = await ProtectedLocalStore.GetAsync<Outfit>(currentSaved);
+        if (result.Success && result.Value != null) {
+            outfit = result.Value;
+            Console.WriteLine($"Retrieved outfit '{currentSaved}' with {outfit.Parts.Count} parts.");
+        }
+        else {
+            Console.WriteLine($"Retrieving oufit {currentSaved} failed");
+        }
+    }
 
-        // TODO
+    private async Task UpdateOutfit() {
+        // set selected outfit from dropdown to whatever character is wearing
+        await ProtectedLocalStore.SetAsync(currentSaved, outfit);
+        Console.WriteLine($"Updating outfit '{outfitName}' with {outfit.Parts.Count} parts.");
+    }
+
+    private async Task DeleteOutfit() {
+        // ask for confirmation then delete outfit currently selected in dropdown
+        // then set dropdown to empty
+        var outfitsResult = await ProtectedLocalStore.GetAsync<List<string>>("savedOutfits");
+        if (outfitsResult.Success && outfitsResult.Value != null) {
+            savedOutfits = outfitsResult.Value;
+        }
+        else {
+            Console.WriteLine("No saved outfits found on DELETE");
+            return;
+        }
+        // no need to check if item exists in savedOutfits because it has to if it's in the dropdown 
+        savedOutfits.Remove(currentSaved);
+        // save to local storage
+        await ProtectedLocalStore.SetAsync("savedOutfits", savedOutfits);
+        await ProtectedLocalStore.DeleteAsync(currentSaved);
+        Console.WriteLine($"Deleted outfit '{outfitName}'");
+        currentSaved = "";
     }
 }
