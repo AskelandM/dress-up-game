@@ -1,4 +1,4 @@
-using BlazorApp.Components;
+using DressUpGame.Components;
 using MudBlazor.Services;
 using Blazored.LocalStorage;
 
