@@ -2,11 +2,11 @@
 @using System.Collections
 @inject IOutfitRepository OutfitRepo
 
-<PageTitle>Dress Up</PageTitle>
+<PageTitle>Marty Dress Up</PageTitle>
 
 <div class="page-wrapper">
     <div class="header-wrapper">
-        <h1 class="page-title">Dress Up Game</h1>
+        <h1 class="page-title">Marty Dress Up Game</h1>
         <div class="save-outfit">
             <MudTextField @bind-Value="outfitName" Label="Outfit Name" Variant="Variant.Outlined" />
 
@@ -47,8 +47,13 @@
 @code {
     private Outfit outfit = new Outfit {
         Parts = new Dictionary<string, string> {
+            { "pants", "black-skinny-jeans.png" },
+            { "shirt", "white-tank-top.png" },
+            { "jacket", "red-flannel.png" },
+            { "arms", "arms.png" },
+            { "hair", "2020s.png" },
             { "face", "2020s.png" },
-            { "shirt", "red-flannel.png" }}
+            { "bangs", "2020s.png" }}
     };
     private string outfitName = string.Empty; // text field
     private List<string> changedPart = new List<string>{"empty", "empty"};
